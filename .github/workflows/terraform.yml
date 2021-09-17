@@ -6,7 +6,7 @@ jobs:
   terraform-default:
     name: Terraform default
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     runs-on: ubuntu-20.04
     steps:
       - name: checkout
