@@ -118,3 +118,16 @@ variable "environment_deployment_branch_policy_custom_branch_policies" {
   description = "Whether only branches that match the specified name patterns can deploy to this environment."
   default     = true
 }
+
+variable "repository_environment_secret_name" {
+  type        = string
+  description = "Name of the secret."
+  default     = ""
+}
+
+variable "repository_environment_secret_plaintext_value" {
+  type        = string
+  description = "Plaintext value of the secret to be encrypted."
+  default     = ""
+  sensitive   = true
+}

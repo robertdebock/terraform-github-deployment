@@ -1,0 +1,42 @@
+---
+on:
+  - push
+
+jobs:
+  terraform-default:
+    name: Terraform default
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: terraform init
+        uses: robertdebock/terraform-action@1.1.1
+        with:
+          directory: ./examples/default
+      - name: terraform validate
+        uses: robertdebock/terraform-action@1.1.1
+        with:
+          action: validate
+          directory: ./examples/default
+      - name: terraform plan
+        uses: robertdebock/terraform-action@1.1.1
+        with:
+          action: plan
+          directory: ./examples/default
+      - name: terraform apply
+        uses: robertdebock/terraform-action@1.1.1
+        with:
+          action: apply
+          directory: ./examples/default
+        env:
+          TF_CLI_ARGS: "-input=false -auto-approve"
+      - name: terraform destroy
+        uses: robertdebock/terraform-action@1.1.1
+        with:
+          action: destroy
+          directory: ./examples/default
+        env:
+          TF_CLI_ARGS: "-input=false -auto-approve"
+        if: ${{ always() }}

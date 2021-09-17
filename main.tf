@@ -35,8 +35,9 @@ resource "github_repository_environment" "default" {
 }
 
 resource "github_actions_environment_secret" "default" {
-  count             = var.repository_environment_secret == "" ? 0 : 1
-  environment       = var.repository_environment
-  secret_name       = var.repository_environment_secret_name
-  plaintext_value   = var.some_secret_string
+  count           = var.repository_environment_secret_name == "" ? 0 : 1
+  repository      = var.repository_name
+  environment     = var.repository_environment
+  secret_name     = var.repository_environment_secret_name
+  plaintext_value = var.repository_environment_secret_plaintext_value
 }
