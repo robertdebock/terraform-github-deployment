@@ -89,12 +89,6 @@ variable "repository_environment" {
   default     = ""
 }
 
-variable "repository_environment_repository" {
-  type        = string
-  description = "The repository of the environment."
-  default     = ""
-}
-
 variable "repository_environment_reviewers_teams" {
   type        = list(string)
   description = "Up to 6 IDs for teams who may review jobs that reference the environment."

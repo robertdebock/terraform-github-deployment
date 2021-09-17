@@ -23,7 +23,7 @@ resource "github_repository" "default" {
 resource "github_repository_environment" "default" {
   count       = var.repository_environment == "" ? 0 : 1
   environment = var.repository_environment
-  repository  = var.repository_environment_repository
+  repository  = github_repository.default[count.index].name
   reviewers {
     teams = var.repository_environment_reviewers_teams
     users = var.repository_environment_reviewers_users
@@ -36,8 +36,8 @@ resource "github_repository_environment" "default" {
 
 resource "github_actions_environment_secret" "default" {
   count           = var.repository_environment_secret_name == "" ? 0 : 1
-  repository      = var.repository_name
-  environment     = var.repository_environment
+  repository      = github_repository.default[count.index].name
+  environment     = github_repository_environment.default[count.index].environment
   secret_name     = var.repository_environment_secret_name
   plaintext_value = var.repository_environment_secret_plaintext_value
 }
