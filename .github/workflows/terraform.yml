@@ -15,6 +15,7 @@ jobs:
           - name: environment
           - name: restrictive
           - name: skipper
+          - name: template
     steps:
       - name: checkout
         uses: actions/checkout@v2

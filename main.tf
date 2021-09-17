@@ -13,8 +13,8 @@ resource "github_repository" "default" {
   dynamic "template" {
     for_each = var.repository_template != null ? [var.repository_template] : []
     content {
-      owner      = repository_template.value.owner
-      repository = repository_template.value.repository
+      owner      = template.value.owner
+      repository = template.value.repository
     }
   }
   vulnerability_alerts = var.repository_vulnerability_alerts

@@ -70,11 +70,11 @@ variable "repository_visibility" {
 
 variable "repository_template" {
   description = "Use a template repository to create this resource."
-  default     = ""
-  type = object({
+  type        = object({
     owner      = string
     repository = string
   })
+  default     = null
 }
 
 variable "repository_vulnerability_alerts" {
