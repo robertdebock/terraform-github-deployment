@@ -16,6 +16,7 @@ jobs:
           - name: restrictive
           - name: skipper
           - name: template
+          - name: repositories
     steps:
       - name: checkout
         uses: actions/checkout@v2
