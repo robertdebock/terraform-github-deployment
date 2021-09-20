@@ -1,43 +1,6 @@
 resource "github_repository" "default" {
-  count              = var.repository_name == "" ? 0 : 1
-  name               = var.repository_name
-  description        = var.repository_description
-  homepage_url       = var.repository_homepage_url
-  has_issues         = var.repository_has_issues
-  has_projects       = var.repository_has_projects
-  has_wiki           = var.repository_has_wiki
-  allow_squash_merge = var.repository_allow_squash_merge
-  allow_rebase_merge = var.repository_allow_rebase_merge
-  topics             = var.repository_topics
-  visibility         = var.repository_visibility
-  dynamic "template" {
-    for_each = var.repository_template != null ? [var.repository_template] : []
-    content {
-      owner      = template.value.owner
-      repository = template.value.repository
-    }
-  }
-  vulnerability_alerts = var.repository_vulnerability_alerts
-}
-
-resource "github_repository_environment" "default" {
-  count       = var.repository_environment == "" ? 0 : 1
-  environment = var.repository_environment
-  repository  = github_repository.default[count.index].name
-  reviewers {
-    teams = var.repository_environment_reviewers_teams
-    users = var.repository_environment_reviewers_users
-  }
-  deployment_branch_policy {
-    protected_branches     = var.environment_deployment_branch_policy_protected_braches
-    custom_branch_policies = var.environment_deployment_branch_policy_custom_branch_policies
-  }
-}
-
-resource "github_actions_environment_secret" "default" {
-  count           = var.repository_environment_secret_name == "" ? 0 : 1
-  repository      = github_repository.default[count.index].name
-  environment     = github_repository_environment.default[count.index].environment
-  secret_name     = var.repository_environment_secret_name
-  plaintext_value = var.repository_environment_secret_plaintext_value
-}
+ for_each = var.repositories
+ 
+ name = each.value.name
+ description = each.value.description
+ }
