@@ -3,7 +3,7 @@ on:
   - push
 
 jobs:
-  terraform-default:
+  terraform:
     name: terraform
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
