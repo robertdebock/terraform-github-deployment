@@ -1,3 +1,3 @@
 # default
 
-A common and simple example.
+An example that takes a list of repositories to configure.
